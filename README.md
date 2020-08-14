@@ -51,8 +51,8 @@ With the above config in place:
 
 The "backup" subcommand is basically a wrapper around borg create/prune. If
 "mirrors" are defined, rclone will be used to copy the repository to a remote
-location (see syborg-example.cfg for a more complex config file that describes
-all features).
+location (see [syborg-example.cfg](syborg-example.cfg) for a more complex config
+file that describes all features).
 
 There are other borg wrappers too. For example, to check a repository:
 
@@ -67,9 +67,10 @@ To mount a repository:
     sudo pip3 install syborg
 
 To run as system service at specific times(recommended), copy
-syborg-backup@.service and syborg-example@.timer to /etc/systemd/system and
-enable for a specific backup job (which corresponds to a backup section in the
-config file). For the above config file that would be: 
+[syborg-backup@.service](syborg-backup@.service) and
+[syborg-example@.timer](syborg-backup@.timer) to /etc/systemd/system and enable
+for a specific backup job (which corresponds to a backup section in the config
+file). For the above config file that would be: 
 
     systemctl edit syborg@example.timer   # add the [Timer]/OnCalendar section
     systemctl enable syborg@example.timer
@@ -80,8 +81,9 @@ A simpler choice is to use crontab:
     @hourly /usr/bin/syborg backup example
 
 An option to get passphrases from the current user is to use
-systemd-ask-password as `BORG_PASSCOMMAND` (see syborg-example.cfg). In this
-case, you probably want to install systemd-gtk-ask-password-agent to /usr/bin
-and systemd-gtk-ask-password-agent.desktop to /etc/xdg/autostart. These files
+systemd-ask-password as `BORG_PASSCOMMAND` (see
+[syborg-example.cfg](syborg-example.cfg)). In this case, you probably want to
+install systemd-gtk-ask-password-agent to /usr/bin and
+systemd-gtk-ask-password-agent.desktop to /etc/xdg/autostart. These files
 implement a password agent and will ensure a gtk notification/dialog are
 presented when syborg requires a password. 
