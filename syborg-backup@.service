@@ -1,0 +1,6 @@
+[Unit]
+Description=run syborg backup
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/syborg backup %i
