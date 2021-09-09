@@ -11,6 +11,11 @@ setup(
     version=VERSION,
     description='Nice borgbackup wrapper',
     py_modules=['syborg'],
+    data_files=[('share/syborg/examples', [
+        'syborg-example.cfg',
+        'syborg-backup@.service',
+        'syborg-backup@.timer',
+        ])],
     author='Thiago de Arruda Padilha',
     author_email='tpadilha84@gmail.com',
     url=REPO,
