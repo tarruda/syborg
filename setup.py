@@ -10,11 +10,12 @@ setup(
     name='syborg',
     version=VERSION,
     description='Nice borgbackup wrapper',
-    py_modules=['syborg'],
-    data_files=[('share/syborg/examples', [
+    py_modules=['syborg', 'password_agent'],
+    data_files=[('share/syborg', [
         'syborg-example.cfg',
         'syborg-backup@.service',
         'syborg-backup@.timer',
+        'systemd-gtk-ask-password-agent.desktop',
         ])],
     author='Thiago de Arruda Padilha',
     author_email='tpadilha84@gmail.com',
@@ -25,5 +26,6 @@ setup(
     entry_points='''
     [console_scripts]
     syborg=syborg:main
+    systemd-gtk-ask-password-agent=password_agent:main
     ''',
     )
