@@ -144,7 +144,7 @@ def cache_passphrase(env, passcommand, test_passphrase):
     if not key_id:
         tries = 0
         while True:
-            # not stored yet. run BORG_PASSCOMMAND to retrive the passphrase
+            # not stored yet. run "passcommand" to retrive the passphrase
             passphrase = str(sh.sh('-c', passcommand, env=env)).strip()
             if test_passphrase(passphrase):
                 break
@@ -180,9 +180,7 @@ def set_rclone_passphrase(env):
         code = rclone('config', 'dump', '--ask-password=false',
                 stdout=NULL, env={'RCLONE_CONFIG_PASS': passphrase})[0]
         return code == 0
-    passphrase = str(sh.sh('-c', cache_passphrase(env, passcommand,
-        test))).strip()
-    env['RCLONE_CONFIG_PASS'] = passphrase
+    env['RCLONE_PASSWORD_COMMAND'] = cache_passphrase(env, passcommand, test)
 
 
 def ssh_add(env):
