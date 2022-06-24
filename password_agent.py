@@ -3,6 +3,7 @@
 import os
 import time
 import sys
+import traceback
 
 import gi
 
@@ -71,7 +72,7 @@ def file_monitor_changed(monitor, file, other_file, event_type, app):
         try:
             look_for_password(app)
         except Exception as e:
-            log('error in look_for_password: {}', e)
+            log('error in look_for_password: {}', traceback.format_exc())
         
 
 def look_for_password(app):
@@ -135,8 +136,10 @@ def load_password(app):
         icon = 'dialog-password'
     app.status_icon.set_property('icon_name', icon)
 
-    n = Notify.Notification.new(app.status_icon.get_property('title'),
-            message, icon)
+    n = Notify.Notification.new(
+            app.status_icon.get_property('title') or "Syborg",
+            message,
+            icon)
     n.set_timeout(5000)
     n.connect('closed',
             lambda *_: app.status_icon.set_property('visible', True))
